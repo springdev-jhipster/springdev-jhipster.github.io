@@ -1,4 +1,5 @@
-This is the source of JHipster's public [Web site](https://www.jhipster.tech/).
+这里是 JHipster 中文网站，由 [Spring 技术社区](https://springdev.io)维护。
+JHipster 的官方网站，请点击 [这里](https://www.jhipster.tech/).
 =======
 
 This Web site is rendered with GitHub pages.
