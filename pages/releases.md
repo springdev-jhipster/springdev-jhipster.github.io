@@ -9,7 +9,7 @@ sitemap:
     lastmod: 2014-02-17T00:00:00-00:00
 ---
 
-# <i class="fa fa-file-text-o"></i> Release notes
+# <i class="fa fa-file-text-o"></i> 发布说明
 
 To get the latest JHipster news, please follow us on Twitter: [@java_hipster](https://twitter.com/java_hipster)
 
