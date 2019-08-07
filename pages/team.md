@@ -179,6 +179,15 @@ If you want to join the team, or just see how we work, our community rules are a
     </div>
     <div class="col-xs-3 team-member">
         <div class="thumbnail no-margin-bottom">
+            <img src="https://avatars.githubusercontent.com/u/15997681?v=3" class="img-responsive">
+            <div class="caption">
+                <h3>Vishal Mahajan</h3>
+                <p><a href="https://twitter.com/vishal423"><i>@vishal423</i></a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 team-member">
+        <div class="thumbnail no-margin-bottom">
             <img src="https://avatars.githubusercontent.com/u/1577727?v=3" class="img-responsive">
             <div class="caption">
                 <h3>William Marques</h3>
@@ -264,6 +273,15 @@ If you want to join the team, or just see how we work, our community rules are a
             <div class="caption">
                 <h3>Srinivasa Vasu</h3>
                 <p><a href="https://twitter.com/srinivasavasu"><i>@srinivasavasu</i></a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 team-member">
+        <div class="thumbnail no-margin-bottom">
+            <img src="https://avatars.githubusercontent.com/u/5289123?v=3" class="img-responsive">
+            <div class="caption">
+                <h3>Pm Verma</h3>
+                <p><a href="https://twitter.com/pm_verma"><i>@pm_verma</i></a></p>
             </div>
         </div>
     </div>
