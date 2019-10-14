@@ -28,22 +28,24 @@ Install and authenticate with the gcloud SDK on your local environment to access
 
 Google App Engine is a fully managed Platform as a Service that can automatically scale up application instances under load, and scale down to zero when not used.
 
-You can use the Google App Engine generator to generate and deploy JHipster application.  Google App Engine generator is currently beta and supports monolith application, with Cloud SQL MySQL/PostgreSQL database.
+You can use the Google App Engine generator to generate and deploy JHipster application. Google App Engine generator supports monolith application, with Cloud SQL MySQL/PostgreSQL database.
 
 1. Generate a new monolith application: `jhipster`
 1. Run Google App Engine generator: `jhipster gae`
-1. When prompted, create a new Cloud SQL instance if creating a brand new application
+1. Optionally create a new Cloud SQL instance if creating a brand new application
 
 This generator will:
-1. Add `src/main/webapp/WEB-INF/application-web.xml` that describes the App Engine instance and autoscaling configuration.
+1. Add `src/main/appengine/app.yaml` that describes the App Engine instance and scaling configuration.
 1. Add the App Engine plugin to Maven / Gradle.
 
 To deploy:
-Please note that on v6 we have migrated to jar packaging. However GAE needs a war so you will need to package your app with the war profile.
+Please note that currently the Google App Engine generator only supports deployments to [App Engine Standard (Java 11)](https://cloud.google.com/appengine/docs/standard/java11/) environment. 
 
-1. Use the App Engine plugin to deploy: `./mvnw appengine:deploy -DskipTests -Pprod,prod-gae,war`
+1. Use the App Engine plugin to deploy: `./mvnw package appengine:deploy -DskipTests -Pgae,prod-gae` or using Gradle `./gradlew appengineDeploy -Pgae -Pprod-gae`
 
-In addition to simply run your application, Google App Engine provides full suite of features to manage and operate:
+2. If you are using Cloud SQL, you need to add Cloud SQL Client role to the App Engine service account. Refer, https://cloud.google.com/sql/docs/mysql/connect-app-engine#setting_up
+
+In addition, Google App Engine provides a full suite of features to manage your application:
 - Traffic Splitting - Deploy multiple versions of your application and split traffic to different versions. This is also great for canary new changes.
 - Stackdriver Logging - Automatically capture and store application logs in centralized logging that can be searched, monitored, and exported.
 - Error Reporting - Automatically extract errors and exceptions for the log and notify you of new errors.

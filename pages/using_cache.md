@@ -19,7 +19,7 @@ Spring Cache and the Hibernate 2nd-level cache will use the same caching solutio
 - Spring Cache for higher-level or aggregate objects, like you typically have with DTOs
 - The Hibernate 2nd-level cache for entities mapped to the database, in order to reduce the number of SQL requests
 
-JHipster supports 4 caches implementations: Ehcache, Hazelcast, Infinispan and Memcached. They are all detailed below.
+JHipster supports 5 caches implementations: Ehcache, Caffeine, Hazelcast, Infinispan and Memcached. They are all detailed below.
 
 ## Common configuration
 
@@ -36,6 +36,18 @@ Ehcache is configured in the `CacheConfiguration` Spring configuration bean, whi
 By default, `time-to-live-seconds` has a default value of 3600 seconds (1 hour) both in `dev` and in `prod` mode, and `max-entries` has a default value of 100 entries in `dev` mode and 1,000 entries in `prod` mode.
 
 Those values should be tuned depending on your specific business needs, and the JHipster monitoring screen can help you better understand cache usage in your application. Please also refer to the Ehcache documentation to fine-tune those values.
+
+## Caching with Caffeine
+
+[Caffeine](https://github.com/ben-manes/caffeine) is a [high performance](https://github.com/ben-manes/caffeine/wiki/Benchmarks), [near optimal](https://github.com/ben-manes/caffeine/wiki/Efficiency) caching library and is an alternative to Ehcache for use with monoliths in JHipster. 
+
+Similar to Ehcache, Caffeine cannot work as a distributed cache.
+
+Jhipster generates a default configuration for Caffeine which is identical to Ehcache. However you may wish to add additional options to fine tune it to your needs. Caffeine cache configuration is done in `CacheConfiguration` Spring configuration bean whereas your application specific properties can be added to `ApplicationProperties` bean. You might find the following three files useful in defining your own Caffeine configuration.
+
+- We use the [`CaffeineConfiguration`](https://github.com/ben-manes/caffeine/blob/master/jcache/src/main/java/com/github/benmanes/caffeine/jcache/configuration/CaffeineConfiguration.java) class within the `CacheConfiguration` bean to add Caffeine properties.
+
+- You might find [`TypesafeConfigurator`](https://github.com/ben-manes/caffeine/blob/master/jcache/src/main/java/com/github/benmanes/caffeine/jcache/configuration/TypesafeConfigurator.java) along with [`reference.conf`](https://github.com/ben-manes/caffeine/blob/master/jcache/src/main/resources/reference.conf) as a reference to all supported Caffeine properties.
 
 ## Caching with Hazelcast
 
@@ -105,3 +117,13 @@ Please note that each cache must be configured as a specific Spring bean inside 
 As Memcached needs to serialize/deserialize objects in its classloader, it doesn't work when using the Spring Boot devtools (which uses a specific classloader to do hot reload of application classes). This is why Memcached is disabled by default in dev mode.
 
 As always with JHipster, a Docker Compose configuration is provided so you can easily start a Memcached server on your machine. In order to use it, please run `docker-compose -f src/main/docker/memcached.yml up -d`.
+
+## Caching with Redis
+
+[Redis](https://redis.io/) is an Open Source, in-memory data struture store that can be used as a performant caching solution. It is currently implemented in the generator JHipster as a single server node but can also work as a distributed cache.
+
+JHipster uses [Redisson](https://redisson.org/) as the redis Java client mainly for 2 reasons:
+- It is highly recommended by Redis
+- It offers a JCache (JSR-107) implementation
+
+It allows both to stay consistent with the other caches since we are using JCache implementation when available and to share the same redis connection between Spring cache and the Hibernate 2nd level cache.
